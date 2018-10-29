@@ -14,6 +14,9 @@ class Configuration implements ConfigurationInterface
 
         $rootNode
             ->children()
+                ->scalarNode('key_prefix')
+                    ->defaultValue('')
+                ->end()
                 ->arrayNode('adapter')
                     ->isRequired()
                     ->children()
