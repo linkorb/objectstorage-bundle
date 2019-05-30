@@ -57,7 +57,6 @@ class ConfigurationTest extends TestCase
                     ],
                 ],
                 [
-                    'key_prefix' => '',
                     'adapter' => [
                         'bergen' => [
                             'host' => 'some-host',
@@ -77,7 +76,6 @@ class ConfigurationTest extends TestCase
                     ],
                 ],
                 [
-                    'key_prefix' => '',
                     'adapter' => [
                         'file' => [
                             'path' => '/path/to/some/dir',
@@ -95,7 +93,6 @@ class ConfigurationTest extends TestCase
                     ],
                 ],
                 [
-                    'key_prefix' => '',
                     'adapter' => [
                         'gridfs' => [
                             'dbname' => 'some-dbname',
@@ -113,7 +110,6 @@ class ConfigurationTest extends TestCase
                     ],
                 ],
                 [
-                    'key_prefix' => '',
                     'adapter' => [
                         'pdo' => [
                             'dsn' => 'scheme://some-user:pass@host/database',
@@ -133,7 +129,6 @@ class ConfigurationTest extends TestCase
                     ],
                 ],
                 [
-                    'key_prefix' => '',
                     'adapter' => [
                         's3' => [
                             'key' => 'some-access-key',
