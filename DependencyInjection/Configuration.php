@@ -58,7 +58,6 @@ class Configuration implements ConfigurationInterface
                             ->end()
                         ->end()
                         ->arrayNode('pdo')
-                            ->addDefaultsIfNotSet()
                             ->children()
                                 ->scalarNode('dsn')
                                     ->isRequired()
