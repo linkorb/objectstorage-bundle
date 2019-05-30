@@ -95,6 +95,17 @@ class Configuration implements ConfigurationInterface
                         ->end()
                     ->end()
                 ->end()
+                ->arrayNode('storage_encryption')
+                    ->children()
+                        ->scalarNode('encryption_key_path')
+                            ->isRequired()
+                            ->cannotBeEmpty()
+                        ->end()
+                        ->booleanNode('encrypt_storage_keys')
+                            ->defaultTrue()
+                        ->end()
+                    ->end()
+                ->end()
             ->end()
         ;
 

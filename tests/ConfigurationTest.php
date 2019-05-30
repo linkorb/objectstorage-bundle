@@ -48,6 +48,57 @@ class ConfigurationTest extends TestCase
                     ],
                 ],
             ],
+            'config for storage key and object encryption' => [
+                [
+                    'adapter' => 'file',
+                    'adapters' => [
+                        'file' => [
+                            'path' => '/path/to/some/dir',
+                        ],
+                    ],
+                    'storage_encryption' => [
+                        'encryption_key_path' => '/path/to/encryption/key',
+                    ]
+                ],
+                [
+                    'adapter' => 'file',
+                    'adapters' => [
+                        'file' => [
+                            'path' => '/path/to/some/dir',
+                        ],
+                    ],
+                    'storage_encryption' => [
+                        'encryption_key_path' => '/path/to/encryption/key',
+                        'encrypt_storage_keys' => true,
+                    ]
+                ],
+            ],
+            'config for object encryption and plaintext storage keys' => [
+                [
+                    'adapter' => 'file',
+                    'adapters' => [
+                        'file' => [
+                            'path' => '/path/to/some/dir',
+                        ],
+                    ],
+                    'storage_encryption' => [
+                        'encryption_key_path' => '/path/to/encryption/key',
+                        'encrypt_storage_keys' => false,
+                    ]
+                ],
+                [
+                    'adapter' => 'file',
+                    'adapters' => [
+                        'file' => [
+                            'path' => '/path/to/some/dir',
+                        ],
+                    ],
+                    'storage_encryption' => [
+                        'encryption_key_path' => '/path/to/encryption/key',
+                        'encrypt_storage_keys' => false,
+                    ]
+                ],
+            ],
             'minimal bergen adapter config' => [
                 [
                     'adapter' => 'bergen',
