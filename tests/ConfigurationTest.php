@@ -31,7 +31,8 @@ class ConfigurationTest extends TestCase
             'config includes a storage key prefix' => [
                 [
                     'key_prefix' => 'some-prefix',
-                    'adapter' => [
+                    'adapter' => 'file',
+                    'adapters' => [
                         'file' => [
                             'path' => '/path/to/some/dir',
                         ],
@@ -39,7 +40,8 @@ class ConfigurationTest extends TestCase
                 ],
                 [
                     'key_prefix' => 'some-prefix',
-                    'adapter' => [
+                    'adapter' => 'file',
+                    'adapters' => [
                         'file' => [
                             'path' => '/path/to/some/dir',
                         ],
@@ -48,7 +50,8 @@ class ConfigurationTest extends TestCase
             ],
             'minimal bergen adapter config' => [
                 [
-                    'adapter' => [
+                    'adapter' => 'bergen',
+                    'adapters' => [
                         'bergen' => [
                             'host' => 'some-host',
                             'username' => 'some-user',
@@ -57,7 +60,8 @@ class ConfigurationTest extends TestCase
                     ],
                 ],
                 [
-                    'adapter' => [
+                    'adapter' => 'bergen',
+                    'adapters' => [
                         'bergen' => [
                             'host' => 'some-host',
                             'username' => 'some-user',
@@ -69,14 +73,16 @@ class ConfigurationTest extends TestCase
             ],
             'minimal file adapter config' => [
                 [
-                    'adapter' => [
+                    'adapter' => 'file',
+                    'adapters' => [
                         'file' => [
                             'path' => '/path/to/some/dir',
                         ],
                     ],
                 ],
                 [
-                    'adapter' => [
+                    'adapter' => 'file',
+                    'adapters' => [
                         'file' => [
                             'path' => '/path/to/some/dir',
                         ],
@@ -85,7 +91,8 @@ class ConfigurationTest extends TestCase
             ],
             'minimal gridfs adapter config' => [
                 [
-                    'adapter' => [
+                    'adapter' => 'gridfs',
+                    'adapters' => [
                         'gridfs' => [
                             'dbname' => 'some-dbname',
                             'server' => 'some-servername',
@@ -93,7 +100,8 @@ class ConfigurationTest extends TestCase
                     ],
                 ],
                 [
-                    'adapter' => [
+                    'adapter' => 'gridfs',
+                    'adapters' => [
                         'gridfs' => [
                             'dbname' => 'some-dbname',
                             'server' => 'some-servername',
@@ -103,14 +111,16 @@ class ConfigurationTest extends TestCase
             ],
             'minimal pdo adapter config' => [
                 [
-                    'adapter' => [
+                    'adapter' => 'pdo',
+                    'adapters' => [
                         'pdo' => [
                             'dsn' => 'scheme://some-user:pass@host/database',
                         ],
                     ],
                 ],
                 [
-                    'adapter' => [
+                    'adapter' => 'pdo',
+                    'adapters' => [
                         'pdo' => [
                             'dsn' => 'scheme://some-user:pass@host/database',
                             'tablename' => 'objectstorage'
@@ -120,7 +130,8 @@ class ConfigurationTest extends TestCase
             ],
             'minimal s3 adapter config' => [
                 [
-                    'adapter' => [
+                    'adapter' => 's3',
+                    'adapters' => [
                         's3' => [
                             'key' => 'some-access-key',
                             'secret' => 'some-access-secret',
@@ -129,7 +140,8 @@ class ConfigurationTest extends TestCase
                     ],
                 ],
                 [
-                    'adapter' => [
+                    'adapter' => 's3',
+                    'adapters' => [
                         's3' => [
                             'key' => 'some-access-key',
                             'secret' => 'some-access-secret',

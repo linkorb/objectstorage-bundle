@@ -22,8 +22,8 @@ class ObjectStorageExtension extends Extension
         $config = $this->processConfiguration($configuration, $configs);
 
         $adapterDefn = $container->getDefinition('object_storage.adapter');
-        $adapterDefn->replaceArgument('$type', \key($config['adapter']));
-        $adapterDefn->replaceArgument('$config', \current($config['adapter']));
+        $adapterDefn->replaceArgument('$type', $config['adapter']);
+        $adapterDefn->replaceArgument('$config', $config['adapters'][$config['adapter']]);
 
         if (\array_key_exists('key_prefix', $config)) {
             $container->getDefinition('ObjectStorage\Service')
