@@ -2,6 +2,7 @@
 
 namespace LinkORB\ObjectStorage;
 
+use ObjectStorage\Adapter\AbstractEncryptedStorageAdapter;
 use ObjectStorage\Adapter\EncryptedStorageAdapter;
 use ObjectStorage\Adapter\PlaintextStorageKeyEncryptedStorageAdapter;
 use ObjectStorage\Adapter\StorageAdapterInterface;
@@ -20,6 +21,8 @@ class AdapterFactory
             );
         }
 
+        $config = $config[$type];
+
         $storageAdapter = $class::build($config);
 
         if (empty($cryptoConfig)) {
@@ -27,13 +30,15 @@ class AdapterFactory
         }
 
         $encryptedAdapterConfig = [
-            EncryptedStorageAdapter::CFG_STORAGE_ADAPTER => $storageAdapter,
-            EncryptedStorageAdapter::CFG_ENCRYPTION_KEY_PATH => $cryptoConfig['encryption_key_path'],
+            AbstractEncryptedStorageAdapter::CFG_STORAGE_ADAPTER => $storageAdapter,
+            AbstractEncryptedStorageAdapter::CFG_ENCRYPTION_KEY_PATH => $cryptoConfig['encryption_key_path'],
         ];
 
-        if (false === $cryptoConfig['encrypt_storage_keys']) {
+        if (false === $cryptoConfig['encrypt_storage_keys']['enabled']) {
             return PlaintextStorageKeyEncryptedStorageAdapter::build($encryptedAdapterConfig);
         }
+
+        $encryptedAdapterConfig[AbstractEncryptedStorageAdapter::CFG_AUTHENTICATION_KEY_PATH] = $cryptoConfig['encrypt_storage_keys']['signing_key_path'];
 
         return EncryptedStorageAdapter::build($encryptedAdapterConfig);
     }

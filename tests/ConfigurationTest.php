@@ -4,6 +4,7 @@ namespace LinkORB\ObjectStorage\Test;
 
 use LinkORB\ObjectStorage\DependencyInjection\Configuration;
 use PHPUnit\Framework\TestCase;
+use Symfony\Component\Config\Definition\Exception\InvalidConfigurationException;
 
 class ConfigurationTest extends TestCase
 {
@@ -13,7 +14,7 @@ class ConfigurationTest extends TestCase
      * @param mixed $inputConfig
      * @param mixed $expectedConfig
      */
-    public function testConfiguration($inputConfig, $expectedConfig)
+    public function testGoodConfiguration($inputConfig, $expectedConfig)
     {
         $configuration = new Configuration();
 
@@ -23,6 +24,23 @@ class ConfigurationTest extends TestCase
         $finalizedConfig = $node->finalize($normalizedConfig);
 
         $this->assertEquals($expectedConfig, $finalizedConfig);
+    }
+
+    /**
+     * @dataProvider badConfigurations
+     *
+     * @param mixed $inputConfig
+     */
+    public function testBadConfiguration($inputConfig)
+    {
+        $this->expectException(InvalidConfigurationException::class);
+
+        $configuration = new Configuration();
+
+        $node = $configuration->getConfigTreeBuilder()
+            ->buildTree();
+        $normalizedConfig = $node->normalize($inputConfig);
+        $finalizedConfig = $node->finalize($normalizedConfig);
     }
 
     public function goodConfigurations()
@@ -58,6 +76,9 @@ class ConfigurationTest extends TestCase
                     ],
                     'storage_encryption' => [
                         'encryption_key_path' => '/path/to/encryption/key',
+                        'encrypt_storage_keys' => [
+                            'signing_key_path' => '/path/to/signing/key',
+                        ],
                     ]
                 ],
                 [
@@ -69,7 +90,10 @@ class ConfigurationTest extends TestCase
                     ],
                     'storage_encryption' => [
                         'encryption_key_path' => '/path/to/encryption/key',
-                        'encrypt_storage_keys' => true,
+                        'encrypt_storage_keys' => [
+                            'enabled' => true,
+                            'signing_key_path' => '/path/to/signing/key',
+                        ],
                     ]
                 ],
             ],
@@ -83,7 +107,6 @@ class ConfigurationTest extends TestCase
                     ],
                     'storage_encryption' => [
                         'encryption_key_path' => '/path/to/encryption/key',
-                        'encrypt_storage_keys' => false,
                     ]
                 ],
                 [
@@ -95,7 +118,9 @@ class ConfigurationTest extends TestCase
                     ],
                     'storage_encryption' => [
                         'encryption_key_path' => '/path/to/encryption/key',
-                        'encrypt_storage_keys' => false,
+                        'encrypt_storage_keys' => [
+                            'enabled' => false,
+                        ],
                     ]
                 ],
             ],
@@ -202,6 +227,28 @@ class ConfigurationTest extends TestCase
                             'version' => '2006-03-01',
                         ],
                     ],
+                ],
+            ],
+        ];
+    }
+
+    public function badConfigurations()
+    {
+        return [
+            'config for storage key and object encryption is missing the required signing key path' => [
+                [
+                    'adapter' => 'file',
+                    'adapters' => [
+                        'file' => [
+                            'path' => '/path/to/some/dir',
+                        ],
+                    ],
+                    'storage_encryption' => [
+                        'encryption_key_path' => '/path/to/encryption/key',
+                        'encrypt_storage_keys' => [
+                            'enabled' => true,
+                        ],
+                    ]
                 ],
             ],
         ];
