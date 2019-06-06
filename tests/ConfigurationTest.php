@@ -79,7 +79,7 @@ class ConfigurationTest extends TestCase
                         'encrypt_storage_keys' => [
                             'signing_key_path' => '/path/to/signing/key',
                         ],
-                    ]
+                    ],
                 ],
                 [
                     'adapter' => 'file',
@@ -94,7 +94,7 @@ class ConfigurationTest extends TestCase
                             'enabled' => true,
                             'signing_key_path' => '/path/to/signing/key',
                         ],
-                    ]
+                    ],
                 ],
             ],
             'config for object encryption and plaintext storage keys' => [
@@ -107,7 +107,7 @@ class ConfigurationTest extends TestCase
                     ],
                     'storage_encryption' => [
                         'encryption_key_path' => '/path/to/encryption/key',
-                    ]
+                    ],
                 ],
                 [
                     'adapter' => 'file',
@@ -121,7 +121,7 @@ class ConfigurationTest extends TestCase
                         'encrypt_storage_keys' => [
                             'enabled' => false,
                         ],
-                    ]
+                    ],
                 ],
             ],
             'minimal bergen adapter config' => [
@@ -199,7 +199,7 @@ class ConfigurationTest extends TestCase
                     'adapters' => [
                         'pdo' => [
                             'dsn' => 'scheme://some-user:pass@host/database',
-                            'tablename' => 'objectstorage'
+                            'tablename' => 'objectstorage',
                         ],
                     ],
                 ],
@@ -248,7 +248,7 @@ class ConfigurationTest extends TestCase
                         'encrypt_storage_keys' => [
                             'enabled' => true,
                         ],
-                    ]
+                    ],
                 ],
             ],
         ];
