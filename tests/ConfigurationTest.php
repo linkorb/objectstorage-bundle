@@ -209,8 +209,8 @@ class ConfigurationTest extends TestCase
                     'adapter' => 's3',
                     'adapters' => [
                         's3' => [
-                            'key' => 'some-access-key',
-                            'secret' => 'some-access-secret',
+                            'access_key' => 'some-access-key',
+                            'secret_key' => 'some-access-secret',
                             'bucketname' => 'some-bucketname',
                             'region' => 'some-region-1',
                         ],
@@ -220,8 +220,8 @@ class ConfigurationTest extends TestCase
                     'adapter' => 's3',
                     'adapters' => [
                         's3' => [
-                            'key' => 'some-access-key',
-                            'secret' => 'some-access-secret',
+                            'access_key' => 'some-access-key',
+                            'secret_key' => 'some-access-secret',
                             'bucketname' => 'some-bucketname',
                             'region' => 'some-region-1',
                             'version' => '2006-03-01',
